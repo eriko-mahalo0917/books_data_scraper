@@ -86,21 +86,15 @@ class DataSaver:
     #３つ目のフロー
     #CSVの１行目に見出し(ヘッダー)を書き込む
     #----------------------------------------------
-    def write_csv_header(self, csv_writer, books_details_results):
+    def write_csv_header(self, csv_writer, csv_header_names):
         try:
             self.logger.info("CSVヘッダーの書き込みを開始します")
-            #1件目のデータ辞書からキーを取り出す
-            #{"title": "本A", "price": "100円"} ➔ ["title", "price"]
-            #[0] は1件目のデータでキーだけを取り出している
-            books_csv_header = list(books_details_results[0].keys())
-            
-            #csv_writerを使って1行目を書き込む
             #writerow（ライト・ロウ）は「1行書く」という命令!
-            #取り出した1件目のデータの辞書のキーを1行目に書く命令
-            csv_writer.writerow(books_csv_header)
+            csv_writer.writerow(csv_header_names)
             
-            self.logger.info(f"CSVヘッダーの書き込みが成功しました:{books_csv_header}")
-            return books_csv_header
+            self.logger.info(f"CSVヘッダーの書き込みが成功しました:{csv_header_names}")
+            #ここでリストを返すのは成功を返している(Trueで返してもOK!)
+            return csv_header_names
         
         except Exception as e:
             self.logger.error(f"ヘッダーの書き込みに失敗しました: {e}")

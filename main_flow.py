@@ -57,7 +57,7 @@ class BooksScrapingMainFlow:
         csv_file, csv_writer = data_saver.open_csv_file(books_file_path)
         
         #３つ目のフロー：CSVのヘッダーを書き込み
-        data_saver.write_csv_header(csv_writer, books_details_results=all_books)
+        data_saver.write_csv_header(csv_writer, config.CSV_HEADERS)
         
         #4つ目のフロー：CSVデータの書き込み
         data_saver.write_csv_rows(csv_writer, csv_file, books_details_results=all_books)
