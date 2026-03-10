@@ -85,6 +85,16 @@ class BooksScraper:
                 #④在庫状況:<p class="instock availability">→これ以下の在庫ありのテキストの前後に大量の空白があるため、.strip()で文字の前後を消す
                 book_stock = book.find("p", class_ = "instock availability").text.strip()
                 
+                #⑤在庫の有無を日本語にする
+                if "In stock" in book_stock:
+                    book_stock = "在庫あり"
+                elif "Out of stock" in book_stock:
+                    book_stock = "在庫なし"
+                else:
+                    book_stock = "確認要"
+                
+                    
+                
                 
                 #⑤商品詳細URL:h3の中のhref="../../a-light-in-the-attic_1000/index.html"だけど、
                 #このままでは使えないため、修正する
