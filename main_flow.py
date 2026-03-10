@@ -45,8 +45,27 @@ class BooksScrapingMainFlow:
             #----------------------------------------------
             #３つ目のフロー:次のページのURLを取得
             #----------------------------------------------
-            next_page_url = books_scraper.get_next_page_url(page_html)
+            #取得したURLは省略形（page-2.htmlなど）だから、config.TARGET_URLと合体して全部のURLを表示させないといねいあ
+            next_page_path = books_scraper.get_next_page_url(page_html)
             
+            #次のページが見つかったらURLを合体させる
+            if next_page_path:
+                #もし次のページが見つかったときは"catalogue/"が含まれている
+                if "catalogue/" in next_page_path:
+                    next_page_url = f"{config.TARGET_URL}{next_page_path}"
+                    
+                
+                else:
+                    #含まれていない場合h（2ページ以降）
+                    next_page_url =  f"{config.TARGET_URL}catalogue/{next_page_path}"
+                    
+            #見つからなかったら最終ページだからNoneでループで終わらせる
+            else:
+                next_page_url = None
+                    
+                
+                
+                
         #----------------------------------------------
         #save_data
         #----------------------------------------------
